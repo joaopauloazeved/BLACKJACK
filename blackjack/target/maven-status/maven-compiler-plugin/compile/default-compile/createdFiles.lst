@@ -1,0 +1,11 @@
+com\blackjack\server\jogo\Baralho.class
+com\blackjack\server\ServerMain.class
+com\blackjack\server\BlackjackServiceImpl.class
+com\blackjack\common\modelos\Carta.class
+com\blackjack\common\modelos\JogadorDTO.class
+com\blackjack\common\modelos\Mao.class
+com\blackjack\common\modelos\GerenciadorFichas.class
+com\blackjack\client\ClientMain.class
+com\blackjack\common\modelos\GerenciadorApostas.class
+com\blackjack\common\BlackjackService.class
+com\blackjack\server\jogo\MotorBlackjack.class

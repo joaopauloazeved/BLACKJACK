@@ -3,26 +3,34 @@ package com.blackjack.common.modelos;
 import java.io.Serializable;
 
 public class Carta implements Serializable {
-    private String naipe;
-    private String valor;
+   private  static final long serialVersionUID = 1L;
+    private final String naipe;
+    private final String nome;
+    private final int valorbase;
 
-    public Carta(String naipe, String valor) {
+    public Carta(String naipe, String nome, int valorbase) {
         this.naipe = naipe;
-        this.valor = valor;
+        this.nome = nome;
+        this.valorbase = valorbase;
     }
 
     public String getNaipe() {
         return naipe;
     }
 
-    public String getValor() {
-        return valor;
+    public String getNome() {
+        return nome;
     }
-    
-    @Override 
+
+    public int getValorbase() {
+        return valorbase;
+    }
+
+    @Override
     public String toString() {
-        return valor + " de " + naipe;
+        return "Carta{" +
+                "naipe='" + naipe + '\'' +
+                ", nome='" + nome + '\'' +
+                '}';
     }
-
-
 }
