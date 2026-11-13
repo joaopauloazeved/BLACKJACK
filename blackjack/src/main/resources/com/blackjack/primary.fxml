@@ -3,62 +3,72 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="15.0" style="-fx-background-color: #0b6623;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackjack.client.ClientController">
+<BorderPane styleClass="app-shell" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackjack.client.controllers.ClientController">
+   <top>
+      <VBox>
+         <HBox alignment="CENTER_LEFT" spacing="16" styleClass="header">
+            <Label text="♣" styleClass="brand-mark" />
+            <Label text="BLACKJACK 21" styleClass="brand" />
+            <Label text="ARCADE TABLE  /  MULTIPLAYER" styleClass="section-kicker" />
+            <Label fx:id="connectionLabel" text="OFFLINE" styleClass="connection-label" HBox.hgrow="ALWAYS" />
+         </HBox>
+         <HBox alignment="CENTER_LEFT" spacing="10" styleClass="connection-strip">
+            <Label text="SERVIDOR" styleClass="field-label" />
+            <TextField fx:id="serverIpField" prefWidth="175" text="localhost" promptText="IP do servidor" />
+            <Label text="JOGADOR" styleClass="field-label" />
+            <TextField fx:id="playerNameField" prefWidth="190" promptText="Seu nome" />
+            <Button fx:id="connectButton" text="CONECTAR" onAction="#onConnect" />
+         </HBox>
+      </VBox>
+   </top>
+
+   <center>
+      <VBox spacing="12" styleClass="table-area">
+         <VBox spacing="10" styleClass="dealer-panel">
+            <HBox alignment="CENTER_LEFT" spacing="18" styleClass="dealer-heading">
+               <Label text="01  /  DEALER" styleClass="dealer-title" />
+               <Label fx:id="dealerScoreLabel" text="PONTUAÇÃO  /  --" styleClass="score-label" />
+            </HBox>
+            <HBox fx:id="dealerCards" spacing="10" styleClass="card-row" />
+         </VBox>
+
+         <HBox alignment="CENTER_LEFT" styleClass="status-strip">
+            <Label fx:id="phaseLabel" text="AGUARDANDO CONEXÃO" styleClass="phase-label" />
+            <Label fx:id="messageLabel" text="Conecte-se à mesa para acompanhar a partida." styleClass="message-label" />
+         </HBox>
+
+         <HBox alignment="CENTER_LEFT" styleClass="players-heading">
+            <Label text="02  /  MÃOS DOS JOGADORES" styleClass="players-title" />
+            <Label fx:id="playersCountLabel" text="MESA  /  00 JOGADORES" styleClass="player-count" />
+         </HBox>
+         <ScrollPane fitToHeight="true" hbarPolicy="AS_NEEDED" vbarPolicy="NEVER" styleClass="players-scroll" VBox.vgrow="ALWAYS">
+            <content>
+               <HBox fx:id="playerSeats" spacing="12" styleClass="player-row" />
+            </content>
+         </ScrollPane>
+      </VBox>
+   </center>
+
+   <bottom>
+      <VBox spacing="10" styleClass="action-panel">
+         <Label text="AÇÕES DA MESA" styleClass="action-caption" />
+         <HBox alignment="CENTER_LEFT" spacing="10">
+            <TextField fx:id="betField" prefWidth="150" promptText="Valor da aposta" />
+            <Button fx:id="betButton" text="CONFIRMAR APOSTA" onAction="#onBet" />
+            <Button fx:id="startRoundButton" text="INICIAR RODADA" onAction="#onStartRound" />
+            <HBox HBox.hgrow="ALWAYS" />
+            <Button fx:id="hitButton" text="PEDIR CARTA" styleClass="action-button, secondary-button" onAction="#onHit" />
+            <Button fx:id="standButton" text="PARAR" styleClass="action-button, danger-button" onAction="#onStand" />
+         </HBox>
+      </VBox>
+   </bottom>
    <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      <Insets top="10" right="10" bottom="10" left="10" />
    </padding>
-
-   <Label text="BLACKJACK 21" textFill="WHITE">
-      <font>
-         <Font name="System Bold" size="24.0" />
-      </font>
-   </Label>
-
-   <!-- Mão do Dealer -->
-   <VBox alignment="CENTER" spacing="5.0" style="-fx-border-color: white; -fx-border-radius: 5; -fx-padding: 10;">
-      <Label text="MÃO DO DEALER" textFill="YELLOW">
-         <font><Font name="System Bold" size="14.0" /></font>
-      </Label>
-      <Label fx:id="lblPontosDealer" text="Pontos: 0" textFill="WHITE" />
-      <Label fx:id="lblCartasDealer" text="[ Cartas ]" textFill="WHITE">
-         <font><Font size="16.0" /></font>
-      </Label>
-   </VBox>
-
-   <!-- Status do Jogo -->
-   <Label fx:id="lblMensagem" text="Faça uma aposta para iniciar!" textFill="GOLD">
-      <font><Font name="System Bold" size="14.0" /></font>
-   </Label>
-
-   <!-- Mão do Jogador -->
-   <VBox alignment="CENTER" spacing="5.0" style="-fx-border-color: white; -fx-border-radius: 5; -fx-padding: 10;">
-      <Label fx:id="lblNomeJogador" text="JOGADOR" textFill="CYAN">
-         <font><Font name="System Bold" size="14.0" /></font>
-      </Label>
-      <Label fx:id="lblPontosJogador" text="Pontos: 0" textFill="WHITE" />
-      <Label fx:id="lblCartasJogador" text="[ Cartas ]" textFill="WHITE">
-         <font><Font size="16.0" /></font>
-      </Label>
-   </VBox>
-
-   <!-- Painel de Apostas -->
-   <HBox alignment="CENTER" spacing="15.0">
-      <Label fx:id="lblSaldo" text="Saldo: $1000.0" textFill="WHITE">
-         <font><Font name="System Bold" size="14.0" /></font>
-      </Label>
-      <TextField fx:id="txtAposta" prefWidth="100.0" promptText="Valor" />
-      <Button fx:id="btnApostar" onAction="#handleApostar" text="Apostar" />
-   </HBox>
-
-   <!-- Botões de Ação -->
-   <HBox alignment="CENTER" spacing="15.0">
-      <Button fx:id="btnPedir" disable="true" onAction="#handlePedir" text="Pedir Carta (Hit)" />
-      <Button fx:id="btnParar" disable="true" onAction="#handleParar" text="Parar (Stand)" />
-      <Button fx:id="btnNovaRodada" disable="true" onAction="#handleNovaRodada" text="Nova Rodada" />
-   </HBox>
-</VBox>
+</BorderPane>
