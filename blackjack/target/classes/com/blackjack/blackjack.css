@@ -1,0 +1,328 @@
+.root {
+    -fx-font-family: "Monospaced";
+    -fx-background-color: #101914;
+    -fx-text-fill: #f2e8c9;
+}
+
+.app-shell {
+    -fx-background-color: linear-gradient(to bottom, #14221b, #0d1511);
+}
+
+.header {
+    -fx-padding: 18 26 14 26;
+    -fx-background-color: #101914;
+    -fx-border-color: #345b43;
+    -fx-border-width: 0 0 2 0;
+}
+
+.brand {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f2e8c9;
+}
+
+.brand-mark {
+    -fx-text-fill: #e6b94f;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.connection-label {
+    -fx-text-fill: #92c9a0;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.connection-strip {
+    -fx-alignment: center-left;
+    -fx-spacing: 10;
+    -fx-padding: 12 26;
+    -fx-background-color: #19271f;
+    -fx-border-color: #345b43;
+    -fx-border-width: 0 0 1 0;
+}
+
+.field-label, .section-kicker {
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #9ab4a1;
+}
+
+.text-field {
+    -fx-background-color: #0e1712;
+    -fx-text-fill: #f2e8c9;
+    -fx-prompt-text-fill: #6f8575;
+    -fx-border-color: #4f765b;
+    -fx-border-width: 1;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 9 10;
+    -fx-font-family: "Monospaced";
+}
+
+.text-field:focused {
+    -fx-border-color: #e6b94f;
+}
+
+.button {
+    -fx-background-color: #e6b94f;
+    -fx-text-fill: #172019;
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 14;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-color: #f6d77f #9c7430 #9c7430 #f6d77f;
+    -fx-border-width: 2;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #f4cf70;
+    -fx-translate-y: -1;
+}
+
+.button:pressed {
+    -fx-translate-y: 1;
+    -fx-border-color: #9c7430 #f6d77f #f6d77f #9c7430;
+}
+
+.button:disabled {
+    -fx-background-color: #29362e;
+    -fx-text-fill: #708174;
+    -fx-border-color: #3c5042;
+    -fx-cursor: default;
+}
+
+.table-area {
+    -fx-padding: 20 26 16 26;
+    -fx-spacing: 14;
+    -fx-background-color: #173c2b;
+    -fx-border-color: #537b4b;
+    -fx-border-width: 4;
+    -fx-border-insets: 8;
+}
+
+.dealer-panel {
+    -fx-padding: 15 18 16 18;
+    -fx-spacing: 10;
+    -fx-background-color: #1b4933;
+    -fx-border-color: #64905a;
+    -fx-border-width: 2;
+}
+
+.dealer-heading, .players-heading {
+    -fx-alignment: center-left;
+    -fx-spacing: 12;
+}
+
+.dealer-title, .players-title {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f2e8c9;
+}
+
+.score-label {
+    -fx-text-fill: #e6b94f;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+
+.card-row {
+    -fx-alignment: center-left;
+    -fx-min-height: 128;
+}
+
+.playing-card {
+    -fx-pref-width: 78;
+    -fx-min-width: 78;
+    -fx-max-width: 78;
+    -fx-pref-height: 112;
+    -fx-min-height: 112;
+    -fx-max-height: 112;
+    -fx-padding: 8;
+    -fx-alignment: top-left;
+    -fx-background-color: #f2e8c9;
+    -fx-border-color: #fff8e6 #887c5e #887c5e #fff8e6;
+    -fx-border-width: 3;
+}
+
+.card-rank {
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #172019;
+}
+
+.card-suit {
+    -fx-font-size: 29px;
+    -fx-text-fill: #172019;
+}
+
+.card-suit-name {
+    -fx-font-size: 8px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #6b715e;
+}
+
+.red-card .card-rank, .red-card .card-suit {
+    -fx-text-fill: #b73a35;
+}
+
+.card-back {
+    -fx-alignment: center;
+    -fx-background-color: #bf5847;
+    -fx-border-color: #f2e8c9 #74362f #74362f #f2e8c9;
+}
+
+.card-back .label {
+    -fx-text-fill: #f2e8c9;
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+    -fx-border-color: #f2e8c9;
+    -fx-border-width: 2;
+    -fx-padding: 6 8;
+}
+
+.status-strip {
+    -fx-alignment: center-left;
+    -fx-spacing: 12;
+    -fx-padding: 11 14;
+    -fx-background-color: #10251b;
+    -fx-border-color: #e6b94f;
+    -fx-border-width: 0 0 0 3;
+}
+
+.phase-label {
+    -fx-text-fill: #e6b94f;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.message-label {
+    -fx-text-fill: #f2e8c9;
+    -fx-font-size: 11px;
+}
+
+.players-heading {
+    -fx-padding: 4 0 2 0;
+}
+
+.player-count {
+    -fx-text-fill: #9ab4a1;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+
+.players-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.players-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.player-row {
+    -fx-alignment: top-left;
+    -fx-spacing: 12;
+    -fx-padding: 2 2 10 2;
+}
+
+.player-seat {
+    -fx-pref-width: 290;
+    -fx-min-width: 290;
+    -fx-padding: 14;
+    -fx-spacing: 9;
+    -fx-background-color: #173c2b;
+    -fx-border-color: #42684b;
+    -fx-border-width: 2;
+}
+
+.player-seat.active-seat {
+    -fx-background-color: #234b34;
+    -fx-border-color: #e6b94f;
+}
+
+.player-seat.local-seat {
+    -fx-border-color: #8dcc91;
+}
+
+.player-seat.active-seat.local-seat {
+    -fx-border-color: #e6b94f;
+}
+
+.seat-heading {
+    -fx-alignment: center-left;
+    -fx-spacing: 7;
+}
+
+.seat-name {
+    -fx-text-fill: #f2e8c9;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tag {
+    -fx-padding: 4 6;
+    -fx-font-size: 8px;
+    -fx-font-weight: bold;
+    -fx-background-color: #293a2e;
+    -fx-text-fill: #c2d0b8;
+}
+
+.you-tag {
+    -fx-background-color: #315d3b;
+    -fx-text-fill: #c7edbf;
+}
+
+.turn-tag {
+    -fx-background-color: #e6b94f;
+    -fx-text-fill: #172019;
+}
+
+.status-tag {
+    -fx-background-color: transparent;
+    -fx-text-fill: #9ab4a1;
+    -fx-padding: 2 0;
+}
+
+.seat-details {
+    -fx-alignment: center-left;
+    -fx-spacing: 10;
+    -fx-text-fill: #b8c5b5;
+    -fx-font-size: 9px;
+}
+
+.action-panel {
+    -fx-padding: 14 26 20 26;
+    -fx-spacing: 12;
+    -fx-background-color: #101914;
+    -fx-border-color: #345b43;
+    -fx-border-width: 2 0 0 0;
+}
+
+.action-caption {
+    -fx-text-fill: #9ab4a1;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+
+.action-button {
+    -fx-min-width: 150;
+}
+
+.secondary-button {
+    -fx-background-color: #3a7651;
+    -fx-text-fill: #f2e8c9;
+    -fx-border-color: #76a982 #21482f #21482f #76a982;
+}
+
+.danger-button {
+    -fx-background-color: #bf5847;
+    -fx-text-fill: #fff1dc;
+    -fx-border-color: #e28b73 #74362f #74362f #e28b73;
+}
