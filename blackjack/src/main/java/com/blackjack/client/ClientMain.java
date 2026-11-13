@@ -27,17 +27,32 @@ public class ClientMain {
 
             while (true) {
                 EstadoJogoDTO estado = servico.obterEstadoJogo();
+                String meuId = meuJogador.getId();
+                meuJogador = estado.getJogadores().stream()
+                        .filter(jogador -> jogador.getId().equals(meuId))
+                        .findFirst()
+                        .orElse(meuJogador);
 
                 switch (estado.getFase()) {
                     case AGUARDANDO_JOGADORES:
                     case RODADA_FINALIZADA:
                         System.out.println("\n--- Status: " + estado.getMensagem() + " ---");
-                        System.out.print("Pressione [1] para iniciar nova rodada ou [0] para sair: ");
-                        String op = scanner.nextLine();
-                        if (op.equals("1")) {
-                            servico.iniciarRodada(meuJogador.getId());
-                        } else if (op.equals("0")) {
-                            System.exit(0);
+                        boolean souHost = !estado.getJogadores().isEmpty()
+                                && estado.getJogadores().get(0).getId().equals(meuJogador.getId());
+                        if (souHost) {
+                            System.out.println("Jogadores conectados: " + estado.getJogadores().size());
+                            System.out.print("[1] iniciar rodada, [Enter] aguardar, [0] sair: ");
+                            String op = scanner.nextLine().trim();
+                            if (op.equals("1")) {
+                                servico.iniciarRodada(meuJogador.getId());
+                            } else if (op.equals("0")) {
+                                return;
+                            } else {
+                                Thread.sleep(1000);
+                            }
+                        } else {
+                            System.out.println("Aguardando o criador da sala iniciar a rodada...");
+                            Thread.sleep(1500);
                         }
                         break;
 
@@ -60,8 +75,10 @@ public class ClientMain {
                             String acao = scanner.nextLine();
                             if (acao.equals("1")) {
                                 servico.pedirCarta(meuJogador.getId());
-                            } else {
+                            } else if (acao.equals("2")) {
                                 servico.pararTurno(meuJogador.getId());
+                            } else {
+                                System.out.println("Opção inválida. Digite 1 ou 2.");
                             }
                         } else {
                             System.out.println("Aguardando a jogada de " + estado.getIdJogadorDaVez() + "...");
@@ -90,7 +107,9 @@ public class ClientMain {
 
     private static void exibirMesa(EstadoJogoDTO estado, String meuId) {
         System.out.println("\n=================== MESA DE JOGO ===================");
-        System.out.println("Carta visível do Dealer: " + estado.getMaoDealer().getCartas().get(0));
+        if (!estado.getMaoDealer().getCartas().isEmpty()) {
+            System.out.println("Carta visível da banca: " + estado.getMaoDealer().getCartas().get(0));
+        }
         System.out.println("---------------------------------------------------");
         for (JogadorDTO j : estado.getJogadores()) {
             String marcacao = j.getId().equals(meuId) ? " (VOCÊ)" : "";
