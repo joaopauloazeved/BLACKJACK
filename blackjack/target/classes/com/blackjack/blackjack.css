@@ -1,133 +1,185 @@
+/* =========================================================
+   BLACKJACK 21 - tema pixel art
+   Requer a fonte "Press Start 2P" carregada via Font.loadFont
+   Tamanhos de fonte em múltiplos de 8 (8, 16, 24) ficam mais nítidos;
+   10 e 12 também funcionam bem.
+   ========================================================= */
+
 .root {
-    -fx-font-family: "Monospaced";
-    -fx-background-color: #101914;
-    -fx-text-fill: #f2e8c9;
+    /* paleta limitada = visual de pixel art */
+    -px-black:      #0b0f0d;
+    -px-felt-dark:  #0f2a1d;
+    -px-felt:       #1b5a3a;
+    -px-felt-light: #2b7a4f;
+    -px-gold:       #ffcc33;
+    -px-gold-dark:  #b8860b;
+    -px-cream:      #f6efd6;
+    -px-cream-dark: #a89f7e;
+    -px-red:        #e63946;
+    -px-red-dark:   #8f1d27;
+    -px-green:      #4ade80;
+    -px-green-dark: #1f7a45;
+    -px-muted:      #8fbf9f;
+
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 10px;
+    -fx-background-color: -px-black;
+    -fx-text-fill: -px-cream;
 }
+
+.label {
+    -fx-text-fill: -px-cream;
+}
+
+/* ---------- Fundo geral ---------- */
 
 .app-shell {
-    -fx-background-color: linear-gradient(to bottom, #14221b, #0d1511);
+    -fx-background-color: -px-black;
 }
 
+/* ---------- Cabeçalho ---------- */
+
 .header {
-    -fx-padding: 18 26 14 26;
-    -fx-background-color: #101914;
-    -fx-border-color: #345b43;
-    -fx-border-width: 0 0 2 0;
+    -fx-padding: 16 24 12 24;
+    -fx-background-color: -px-black, -px-felt-dark;
+    -fx-background-insets: 0, 0 0 4 0;
 }
 
 .brand {
-    -fx-font-family: "Monospaced";
-    -fx-font-size: 23px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #f2e8c9;
+    -fx-font-size: 16px;
+    -fx-text-fill: -px-gold;
+    -fx-effect: dropshadow(gaussian, #000000, 0, 0, 2, 2);
 }
 
 .brand-mark {
-    -fx-text-fill: #e6b94f;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: -px-cream;
+}
+
+.section-kicker, .field-label {
+    -fx-font-size: 8px;
+    -fx-text-fill: -px-muted;
 }
 
 .connection-label {
-    -fx-text-fill: #92c9a0;
-    -fx-font-size: 11px;
-    -fx-font-weight: bold;
+    -fx-font-size: 8px;
+    -fx-text-fill: -px-green;
+    -fx-alignment: center-right;
 }
 
 .connection-strip {
     -fx-alignment: center-left;
     -fx-spacing: 10;
-    -fx-padding: 12 26;
-    -fx-background-color: #19271f;
-    -fx-border-color: #345b43;
-    -fx-border-width: 0 0 1 0;
+    -fx-padding: 12 24;
+    -fx-background-color: -px-black, -px-felt-dark;
+    -fx-background-insets: 0, 0 0 4 0;
 }
 
-.field-label, .section-kicker {
-    -fx-font-size: 10px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #9ab4a1;
-}
+/* ---------- Campos de texto ---------- */
 
 .text-field {
-    -fx-background-color: #0e1712;
-    -fx-text-fill: #f2e8c9;
-    -fx-prompt-text-fill: #6f8575;
-    -fx-border-color: #4f765b;
-    -fx-border-width: 1;
-    -fx-border-radius: 0;
+    -fx-background-color: -px-black, -px-cream;
+    -fx-background-insets: 0, 3;
     -fx-background-radius: 0;
-    -fx-padding: 9 10;
-    -fx-font-family: "Monospaced";
+    -fx-text-fill: -px-black;
+    -fx-prompt-text-fill: #7c7660;
+    -fx-font-size: 8px;
+    -fx-padding: 10 10;
+    -fx-border-width: 0;
 }
 
 .text-field:focused {
-    -fx-border-color: #e6b94f;
+    -fx-background-color: -px-gold, -px-cream;
+    -fx-background-insets: 0, 3;
 }
 
+/* ---------- Botões (borda dupla + sombra dura) ---------- */
+
 .button {
-    -fx-background-color: #e6b94f;
-    -fx-text-fill: #172019;
-    -fx-font-family: "Monospaced";
-    -fx-font-size: 11px;
-    -fx-font-weight: bold;
-    -fx-padding: 10 14;
+    -fx-background-color: -px-black, -px-gold-dark, -px-gold;
+    -fx-background-insets: 0, 3, 3 3 7 3;
     -fx-background-radius: 0;
-    -fx-border-radius: 0;
-    -fx-border-color: #f6d77f #9c7430 #9c7430 #f6d77f;
-    -fx-border-width: 2;
+    -fx-text-fill: -px-black;
+    -fx-font-size: 10px;
+    -fx-padding: 12 16 14 16;
+    -fx-border-width: 0;
     -fx-cursor: hand;
+    -fx-effect: dropshadow(gauss, #000000, 0, 0, 4, 4);
 }
 
 .button:hover {
-    -fx-background-color: #f4cf70;
-    -fx-translate-y: -1;
+    -fx-background-color: -px-black, -px-gold-dark, #ffe27a;
 }
 
 .button:pressed {
-    -fx-translate-y: 1;
-    -fx-border-color: #9c7430 #f6d77f #f6d77f #9c7430;
+    -fx-background-insets: 0, 3, 7 3 3 3;
+    -fx-translate-x: 4;
+    -fx-translate-y: 4;
+    -fx-effect: null;
 }
 
 .button:disabled {
-    -fx-background-color: #29362e;
-    -fx-text-fill: #708174;
-    -fx-border-color: #3c5042;
+    -fx-background-color: -px-black, #2a2f2c, #4a514d;
+    -fx-text-fill: #1c201e;
+    -fx-opacity: 1;
     -fx-cursor: default;
+    -fx-effect: dropshadow(gauss, #000000, 0, 0, 4, 4);
 }
 
+.action-button {
+    -fx-min-width: 160;
+}
+
+.secondary-button {
+    -fx-background-color: -px-black, -px-green-dark, -px-green;
+    -fx-text-fill: -px-black;
+}
+
+.secondary-button:hover {
+    -fx-background-color: -px-black, -px-green-dark, #86efac;
+}
+
+.danger-button {
+    -fx-background-color: -px-black, -px-red-dark, -px-red;
+    -fx-text-fill: #ffffff;
+}
+
+.danger-button:hover {
+    -fx-background-color: -px-black, -px-red-dark, #ff6b76;
+}
+
+/* ---------- Mesa ---------- */
+
 .table-area {
-    -fx-padding: 20 26 16 26;
+    -fx-padding: 20 24 16 24;
     -fx-spacing: 14;
-    -fx-background-color: #173c2b;
-    -fx-border-color: #537b4b;
-    -fx-border-width: 4;
-    -fx-border-insets: 8;
+    -fx-background-color: -px-black, -px-felt-light, -px-felt;
+    -fx-background-insets: 8, 12, 16;
+    -fx-background-radius: 0;
 }
 
 .dealer-panel {
-    -fx-padding: 15 18 16 18;
+    -fx-padding: 16 18 16 18;
     -fx-spacing: 10;
-    -fx-background-color: #1b4933;
-    -fx-border-color: #64905a;
-    -fx-border-width: 2;
+    -fx-background-color: -px-black, -px-felt-dark;
+    -fx-background-insets: 0, 4;
+    -fx-effect: dropshadow(gauss, #000000, 0, 0, 4, 4);
 }
 
 .dealer-heading, .players-heading {
     -fx-alignment: center-left;
-    -fx-spacing: 12;
+    -fx-spacing: 14;
 }
 
 .dealer-title, .players-title {
-    -fx-font-size: 13px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #f2e8c9;
+    -fx-font-size: 12px;
+    -fx-text-fill: -px-gold;
+    -fx-effect: dropshadow(gaussian, #000000, 0, 0, 2, 2);
 }
 
 .score-label {
-    -fx-text-fill: #e6b94f;
-    -fx-font-size: 10px;
-    -fx-font-weight: bold;
+    -fx-font-size: 8px;
+    -fx-text-fill: -px-cream;
 }
 
 .card-row {
@@ -135,85 +187,93 @@
     -fx-min-height: 128;
 }
 
+/* ---------- Cartas ---------- */
+
 .playing-card {
-    -fx-pref-width: 78;
-    -fx-min-width: 78;
-    -fx-max-width: 78;
+    -fx-pref-width: 80;
+    -fx-min-width: 80;
+    -fx-max-width: 80;
     -fx-pref-height: 112;
     -fx-min-height: 112;
     -fx-max-height: 112;
-    -fx-padding: 8;
+    -fx-padding: 10;
+    -fx-spacing: 2;
     -fx-alignment: top-left;
-    -fx-background-color: #f2e8c9;
-    -fx-border-color: #fff8e6 #887c5e #887c5e #fff8e6;
-    -fx-border-width: 3;
+    -fx-background-color: -px-black, -px-cream-dark, -px-cream;
+    -fx-background-insets: 0, 3, 3 3 6 3;
+    -fx-background-radius: 0;
+    -fx-effect: dropshadow(gauss, #000000, 0, 0, 4, 4);
 }
 
 .card-rank {
-    -fx-font-size: 19px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #172019;
+    -fx-font-size: 16px;
+    -fx-text-fill: -px-black;
 }
 
 .card-suit {
-    -fx-font-size: 29px;
-    -fx-text-fill: #172019;
+    /* a Press Start 2P não tem ♥♦♠♣ — o JavaFX usa fonte de fallback do sistema */
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 28px;
+    -fx-text-fill: -px-black;
 }
 
 .card-suit-name {
     -fx-font-size: 8px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #6b715e;
+    -fx-text-fill: #6b6650;
 }
 
 .red-card .card-rank, .red-card .card-suit {
-    -fx-text-fill: #b73a35;
+    -fx-text-fill: -px-red;
+}
+
+.red-card .card-suit-name {
+    -fx-text-fill: -px-red-dark;
 }
 
 .card-back {
     -fx-alignment: center;
-    -fx-background-color: #bf5847;
-    -fx-border-color: #f2e8c9 #74362f #74362f #f2e8c9;
+    -fx-background-color: -px-black, -px-cream, #2f4bd0, #4a66f0;
+    -fx-background-insets: 0, 3, 7, 10;
 }
 
 .card-back .label {
-    -fx-text-fill: #f2e8c9;
-    -fx-font-size: 21px;
-    -fx-font-weight: bold;
-    -fx-border-color: #f2e8c9;
-    -fx-border-width: 2;
-    -fx-padding: 6 8;
+    -fx-text-fill: -px-cream;
+    -fx-font-size: 20px;
+    -fx-border-width: 0;
+    -fx-padding: 0;
 }
+
+/* ---------- Barra de status ---------- */
 
 .status-strip {
     -fx-alignment: center-left;
-    -fx-spacing: 12;
-    -fx-padding: 11 14;
-    -fx-background-color: #10251b;
-    -fx-border-color: #e6b94f;
-    -fx-border-width: 0 0 0 3;
+    -fx-spacing: 14;
+    -fx-padding: 12 16;
+    -fx-background-color: -px-black, -px-gold, -px-felt-dark;
+    -fx-background-insets: 0, 0, 0 0 0 8;
+    -fx-effect: dropshadow(gauss, #000000, 0, 0, 4, 4);
 }
 
 .phase-label {
-    -fx-text-fill: #e6b94f;
-    -fx-font-size: 11px;
-    -fx-font-weight: bold;
+    -fx-font-size: 10px;
+    -fx-text-fill: -px-gold;
 }
 
 .message-label {
-    -fx-text-fill: #f2e8c9;
-    -fx-font-size: 11px;
+    -fx-font-size: 8px;
+    -fx-text-fill: -px-cream;
 }
 
 .players-heading {
-    -fx-padding: 4 0 2 0;
+    -fx-padding: 6 0 2 0;
 }
 
 .player-count {
-    -fx-text-fill: #9ab4a1;
-    -fx-font-size: 10px;
-    -fx-font-weight: bold;
+    -fx-font-size: 8px;
+    -fx-text-fill: -px-muted;
 }
+
+/* ---------- Área de jogadores ---------- */
 
 .players-scroll {
     -fx-background-color: transparent;
@@ -226,103 +286,112 @@
     -fx-background-color: transparent;
 }
 
+.players-scroll .scroll-bar:horizontal {
+    -fx-background-color: -px-black;
+    -fx-pref-height: 14;
+}
+
+.players-scroll .scroll-bar .thumb {
+    -fx-background-color: -px-gold;
+    -fx-background-radius: 0;
+}
+
+.players-scroll .scroll-bar .track {
+    -fx-background-color: -px-felt-dark;
+    -fx-background-radius: 0;
+}
+
+.players-scroll .scroll-bar .increment-button,
+.players-scroll .scroll-bar .decrement-button {
+    -fx-padding: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+
 .player-row {
     -fx-alignment: top-left;
-    -fx-spacing: 12;
-    -fx-padding: 2 2 10 2;
+    -fx-spacing: 14;
+    -fx-padding: 2 6 12 2;
 }
 
 .player-seat {
-    -fx-pref-width: 290;
-    -fx-min-width: 290;
-    -fx-padding: 14;
-    -fx-spacing: 9;
-    -fx-background-color: #173c2b;
-    -fx-border-color: #42684b;
-    -fx-border-width: 2;
-}
-
-.player-seat.active-seat {
-    -fx-background-color: #234b34;
-    -fx-border-color: #e6b94f;
+    -fx-pref-width: 304;
+    -fx-min-width: 304;
+    -fx-padding: 16;
+    -fx-spacing: 10;
+    -fx-background-color: -px-black, -px-felt-dark;
+    -fx-background-insets: 0, 4;
+    -fx-effect: dropshadow(gauss, #000000, 0, 0, 4, 4);
 }
 
 .player-seat.local-seat {
-    -fx-border-color: #8dcc91;
+    -fx-background-color: -px-green-dark, -px-felt-dark;
+    -fx-background-insets: 0, 4;
+}
+
+.player-seat.active-seat {
+    -fx-background-color: -px-gold, #1d4a33;
+    -fx-background-insets: 0, 4;
 }
 
 .player-seat.active-seat.local-seat {
-    -fx-border-color: #e6b94f;
+    -fx-background-color: -px-gold, #1d4a33;
+    -fx-background-insets: 0, 4;
 }
 
 .seat-heading {
     -fx-alignment: center-left;
-    -fx-spacing: 7;
+    -fx-spacing: 8;
 }
 
 .seat-name {
-    -fx-text-fill: #f2e8c9;
-    -fx-font-size: 12px;
-    -fx-font-weight: bold;
+    -fx-font-size: 10px;
+    -fx-text-fill: -px-cream;
 }
 
 .tag {
-    -fx-padding: 4 6;
+    -fx-padding: 5 6;
     -fx-font-size: 8px;
-    -fx-font-weight: bold;
-    -fx-background-color: #293a2e;
-    -fx-text-fill: #c2d0b8;
+    -fx-background-color: -px-black, #3a463f;
+    -fx-background-insets: 0, 2;
+    -fx-text-fill: -px-cream;
 }
 
 .you-tag {
-    -fx-background-color: #315d3b;
-    -fx-text-fill: #c7edbf;
+    -fx-background-color: -px-black, -px-green-dark;
+    -fx-background-insets: 0, 2;
+    -fx-text-fill: #d6ffe4;
 }
 
 .turn-tag {
-    -fx-background-color: #e6b94f;
-    -fx-text-fill: #172019;
+    -fx-background-color: -px-black, -px-gold;
+    -fx-background-insets: 0, 2;
+    -fx-text-fill: -px-black;
 }
 
 .status-tag {
     -fx-background-color: transparent;
-    -fx-text-fill: #9ab4a1;
+    -fx-text-fill: -px-muted;
     -fx-padding: 2 0;
 }
 
 .seat-details {
     -fx-alignment: center-left;
     -fx-spacing: 10;
-    -fx-text-fill: #b8c5b5;
-    -fx-font-size: 9px;
+    -fx-font-size: 8px;
+    -fx-text-fill: -px-muted;
 }
 
+/* ---------- Painel de ações ---------- */
+
 .action-panel {
-    -fx-padding: 14 26 20 26;
+    -fx-padding: 16 24 20 24;
     -fx-spacing: 12;
-    -fx-background-color: #101914;
-    -fx-border-color: #345b43;
-    -fx-border-width: 2 0 0 0;
+    -fx-background-color: -px-black, -px-felt-dark;
+    -fx-background-insets: 0, 4 0 0 0;
 }
 
 .action-caption {
-    -fx-text-fill: #9ab4a1;
-    -fx-font-size: 10px;
-    -fx-font-weight: bold;
-}
-
-.action-button {
-    -fx-min-width: 150;
-}
-
-.secondary-button {
-    -fx-background-color: #3a7651;
-    -fx-text-fill: #f2e8c9;
-    -fx-border-color: #76a982 #21482f #21482f #76a982;
-}
-
-.danger-button {
-    -fx-background-color: #bf5847;
-    -fx-text-fill: #fff1dc;
-    -fx-border-color: #e28b73 #74362f #74362f #e28b73;
+    -fx-font-size: 8px;
+    -fx-text-fill: -px-gold;
 }
