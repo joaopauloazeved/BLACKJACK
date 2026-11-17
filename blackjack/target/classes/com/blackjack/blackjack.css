@@ -1,25 +1,23 @@
 /* =========================================================
-   BLACKJACK 21 - tema pixel art
-   Requer a fonte "Press Start 2P" carregada via Font.loadFont
-   Tamanhos de fonte em múltiplos de 8 (8, 16, 24) ficam mais nítidos;
-   10 e 12 também funcionam bem.
+   BLACKJACK 21 - mesa estilo arcade (pixel)
+   Mantém todos os nomes de classe do CSS anterior, então o
+   ClientController continua funcionando sem alterações.
+   Fonte: "Press Start 2P" (carregada no BlackjackApp)
    ========================================================= */
 
 .root {
-    /* paleta limitada = visual de pixel art */
     -px-black:      #0b0f0d;
-    -px-felt-dark:  #0f2a1d;
-    -px-felt:       #1b5a3a;
-    -px-felt-light: #2b7a4f;
-    -px-gold:       #ffcc33;
-    -px-gold-dark:  #b8860b;
-    -px-cream:      #f6efd6;
-    -px-cream-dark: #a89f7e;
-    -px-red:        #e63946;
-    -px-red-dark:   #8f1d27;
-    -px-green:      #4ade80;
-    -px-green-dark: #1f7a45;
-    -px-muted:      #8fbf9f;
+    -px-ink:        #1b201d;
+    -px-ink-light:  #3b423e;
+    -px-cream:      #f4efdc;
+    -px-cream-dark: #a9a287;
+    -px-gold:       #f2c744;
+    -px-gold-dark:  #a97b1c;
+    -px-red:        #d33a3a;
+    -px-red-dark:   #7d1f27;
+    -px-green:      #7be08a;
+    -px-green-dark: #1f6b3a;
+    -px-muted:      #a9c9b2;
 
     -fx-font-family: "Press Start 2P";
     -fx-font-size: 10px;
@@ -31,28 +29,67 @@
     -fx-text-fill: -px-cream;
 }
 
-/* ---------- Fundo geral ---------- */
-
 .app-shell {
     -fx-background-color: -px-black;
 }
 
-/* ---------- Cabeçalho ---------- */
+/* ---------- Mesa: feltro + borda curva em degraus ---------- */
 
-.header {
-    -fx-padding: 16 24 12 24;
-    -fx-background-color: -px-black, -px-felt-dark;
-    -fx-background-insets: 0, 0 0 4 0;
+.table-rim {
+    /* chão, contorno, madeira, azeitona, dourado, feltro */
+    -fx-background-color:
+        #3a1520,
+        #25170e,
+        #5b3b20,
+        #8b7a2c,
+        #c1a53a,
+        #2f6b3d;
+    -fx-background-insets:
+        0,
+        0 0 0 0,
+        0 0 12 0,
+        0 0 24 0,
+        0 0 36 0,
+        0 0 48 0;
+    -fx-background-radius:
+        0,
+        0 0 420 420,
+        0 0 420 420,
+        0 0 420 420,
+        0 0 420 420,
+        0 0 420 420;
+}
+
+.table-layer {
+    -fx-background-color: transparent;
+}
+
+/* ---------- HUD superior ---------- */
+
+.hud-bar {
+    -fx-padding: 0;
+}
+
+.hud-tab {
+    -fx-padding: 12 18 14 18;
+    -fx-background-color: -px-black, -px-ink;
+    -fx-background-insets: 0, 0 4 4 0;
+    -fx-effect: dropshadow(gauss, #000000, 0, 0, 4, 4);
+}
+
+.hud-tab-right {
+    -fx-background-insets: 0, 0 0 4 4;
+    -fx-padding: 12 18 14 22;
 }
 
 .brand {
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
     -fx-text-fill: -px-gold;
-    -fx-effect: dropshadow(gaussian, #000000, 0, 0, 2, 2);
+    -fx-effect: dropshadow(gauss, #000000, 0, 0, 2, 2);
 }
 
 .brand-mark {
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
     -fx-text-fill: -px-cream;
 }
 
@@ -64,15 +101,6 @@
 .connection-label {
     -fx-font-size: 8px;
     -fx-text-fill: -px-green;
-    -fx-alignment: center-right;
-}
-
-.connection-strip {
-    -fx-alignment: center-left;
-    -fx-spacing: 10;
-    -fx-padding: 12 24;
-    -fx-background-color: -px-black, -px-felt-dark;
-    -fx-background-insets: 0, 0 0 4 0;
 }
 
 /* ---------- Campos de texto ---------- */
@@ -84,7 +112,7 @@
     -fx-text-fill: -px-black;
     -fx-prompt-text-fill: #7c7660;
     -fx-font-size: 8px;
-    -fx-padding: 10 10;
+    -fx-padding: 9 10;
     -fx-border-width: 0;
 }
 
@@ -93,22 +121,22 @@
     -fx-background-insets: 0, 3;
 }
 
-/* ---------- Botões (borda dupla + sombra dura) ---------- */
+/* ---------- Botões (padrão escuro) ---------- */
 
 .button {
-    -fx-background-color: -px-black, -px-gold-dark, -px-gold;
+    -fx-background-color: -px-black, -px-ink-light, -px-ink;
     -fx-background-insets: 0, 3, 3 3 7 3;
     -fx-background-radius: 0;
-    -fx-text-fill: -px-black;
+    -fx-text-fill: -px-cream;
     -fx-font-size: 10px;
-    -fx-padding: 12 16 14 16;
+    -fx-padding: 11 16 14 16;
     -fx-border-width: 0;
     -fx-cursor: hand;
     -fx-effect: dropshadow(gauss, #000000, 0, 0, 4, 4);
 }
 
 .button:hover {
-    -fx-background-color: -px-black, -px-gold-dark, #ffe27a;
+    -fx-background-color: -px-black, #5b645f, #2a312d;
 }
 
 .button:pressed {
@@ -119,71 +147,73 @@
 }
 
 .button:disabled {
-    -fx-background-color: -px-black, #2a2f2c, #4a514d;
-    -fx-text-fill: #1c201e;
+    -fx-background-color: -px-black, #2a2f2c, #1a1e1c;
+    -fx-text-fill: #5a615c;
     -fx-opacity: 1;
     -fx-cursor: default;
-    -fx-effect: dropshadow(gauss, #000000, 0, 0, 4, 4);
 }
 
-.action-button {
-    -fx-min-width: 160;
-}
-
-.secondary-button {
-    -fx-background-color: -px-black, -px-green-dark, -px-green;
+.gold-button {
+    -fx-background-color: -px-black, -px-gold-dark, -px-gold;
     -fx-text-fill: -px-black;
 }
 
-.secondary-button:hover {
-    -fx-background-color: -px-black, -px-green-dark, #86efac;
+.gold-button:hover {
+    -fx-background-color: -px-black, -px-gold-dark, #ffdd77;
+}
+
+.gold-button:disabled {
+    -fx-background-color: -px-black, #2a2f2c, #4a514d;
+    -fx-text-fill: #1c201e;
+}
+
+/* PEDIR / PARAR: botões grandes escuros, como na referência */
+.action-button {
+    -fx-min-width: 190;
+    -fx-font-size: 16px;
+    -fx-padding: 16 22 20 22;
+}
+
+.secondary-button {
+    -fx-text-fill: #c8f7cd;
 }
 
 .danger-button {
-    -fx-background-color: -px-black, -px-red-dark, -px-red;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #ffc2b8;
 }
 
-.danger-button:hover {
-    -fx-background-color: -px-black, -px-red-dark, #ff6b76;
-}
-
-/* ---------- Mesa ---------- */
+/* ---------- Painéis da mesa ---------- */
 
 .table-area {
-    -fx-padding: 20 24 16 24;
+    -fx-padding: 14 32 8 32;
     -fx-spacing: 14;
-    -fx-background-color: -px-black, -px-felt-light, -px-felt;
-    -fx-background-insets: 8, 12, 16;
-    -fx-background-radius: 0;
+    -fx-background-color: transparent;
 }
 
 .dealer-panel {
-    -fx-padding: 16 18 16 18;
+    -fx-padding: 10 18 10 18;
     -fx-spacing: 10;
-    -fx-background-color: -px-black, -px-felt-dark;
-    -fx-background-insets: 0, 4;
-    -fx-effect: dropshadow(gauss, #000000, 0, 0, 4, 4);
 }
 
 .dealer-heading, .players-heading {
-    -fx-alignment: center-left;
+    -fx-alignment: center;
     -fx-spacing: 14;
 }
 
 .dealer-title, .players-title {
     -fx-font-size: 12px;
-    -fx-text-fill: -px-gold;
-    -fx-effect: dropshadow(gaussian, #000000, 0, 0, 2, 2);
+    -fx-text-fill: -px-cream;
+    -fx-effect: dropshadow(gauss, #000000, 0, 0, 2, 2);
 }
 
 .score-label {
-    -fx-font-size: 8px;
-    -fx-text-fill: -px-cream;
+    -fx-font-size: 10px;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gauss, #000000, 0, 0, 2, 2);
 }
 
 .card-row {
-    -fx-alignment: center-left;
+    -fx-alignment: center;
     -fx-min-height: 128;
 }
 
@@ -199,8 +229,8 @@
     -fx-padding: 10;
     -fx-spacing: 2;
     -fx-alignment: top-left;
-    -fx-background-color: -px-black, -px-cream-dark, -px-cream;
-    -fx-background-insets: 0, 3, 3 3 6 3;
+    -fx-background-color: -px-black, -px-cream;
+    -fx-background-insets: 0, 4;
     -fx-background-radius: 0;
     -fx-effect: dropshadow(gauss, #000000, 0, 0, 4, 4);
 }
@@ -211,9 +241,8 @@
 }
 
 .card-suit {
-    /* a Press Start 2P não tem ♥♦♠♣ — o JavaFX usa fonte de fallback do sistema */
     -fx-font-family: "Monospaced";
-    -fx-font-size: 28px;
+    -fx-font-size: 30px;
     -fx-text-fill: -px-black;
 }
 
@@ -230,10 +259,14 @@
     -fx-text-fill: -px-red-dark;
 }
 
+/* verso azul listrado na diagonal */
 .card-back {
     -fx-alignment: center;
-    -fx-background-color: -px-black, -px-cream, #2f4bd0, #4a66f0;
-    -fx-background-insets: 0, 3, 7, 10;
+    -fx-background-color:
+        -px-black,
+        linear-gradient(from 0px 0px to 12px 12px, repeat,
+            #4a6fa5 0%, #4a6fa5 50%, #34568a 50%, #34568a 100%);
+    -fx-background-insets: 0, 4;
 }
 
 .card-back .label {
@@ -241,16 +274,18 @@
     -fx-font-size: 20px;
     -fx-border-width: 0;
     -fx-padding: 0;
+    -fx-effect: dropshadow(gauss, #000000, 0, 0, 2, 2);
 }
 
 /* ---------- Barra de status ---------- */
 
 .status-strip {
-    -fx-alignment: center-left;
+    -fx-alignment: center;
     -fx-spacing: 14;
-    -fx-padding: 12 16;
-    -fx-background-color: -px-black, -px-gold, -px-felt-dark;
-    -fx-background-insets: 0, 0, 0 0 0 8;
+    -fx-padding: 9 18;
+    -fx-background-color: -px-black, -px-ink;
+    -fx-background-insets: 0, 3;
+    -fx-max-width: 760;
     -fx-effect: dropshadow(gauss, #000000, 0, 0, 4, 4);
 }
 
@@ -265,15 +300,16 @@
 }
 
 .players-heading {
-    -fx-padding: 6 0 2 0;
+    -fx-padding: 4 0 0 0;
 }
 
 .player-count {
     -fx-font-size: 8px;
-    -fx-text-fill: -px-muted;
+    -fx-text-fill: #d7ecd9;
+    -fx-effect: dropshadow(gauss, #000000, 0, 0, 2, 2);
 }
 
-/* ---------- Área de jogadores ---------- */
+/* ---------- Jogadores ---------- */
 
 .players-scroll {
     -fx-background-color: transparent;
@@ -287,8 +323,8 @@
 }
 
 .players-scroll .scroll-bar:horizontal {
-    -fx-background-color: -px-black;
-    -fx-pref-height: 14;
+    -fx-background-color: transparent;
+    -fx-pref-height: 12;
 }
 
 .players-scroll .scroll-bar .thumb {
@@ -297,7 +333,7 @@
 }
 
 .players-scroll .scroll-bar .track {
-    -fx-background-color: -px-felt-dark;
+    -fx-background-color: rgba(0, 0, 0, 0.35);
     -fx-background-radius: 0;
 }
 
@@ -309,7 +345,7 @@
 }
 
 .player-row {
-    -fx-alignment: top-left;
+    -fx-alignment: top-center;
     -fx-spacing: 14;
     -fx-padding: 2 6 12 2;
 }
@@ -317,26 +353,25 @@
 .player-seat {
     -fx-pref-width: 304;
     -fx-min-width: 304;
-    -fx-padding: 16;
+    -fx-padding: 14;
     -fx-spacing: 10;
-    -fx-background-color: -px-black, -px-felt-dark;
-    -fx-background-insets: 0, 4;
-    -fx-effect: dropshadow(gauss, #000000, 0, 0, 4, 4);
+    -fx-background-color: -px-black, rgba(7, 30, 18, 0.55);
+    -fx-background-insets: 0, 3;
 }
 
 .player-seat.local-seat {
-    -fx-background-color: -px-green-dark, -px-felt-dark;
-    -fx-background-insets: 0, 4;
+    -fx-background-color: -px-green-dark, rgba(7, 30, 18, 0.55);
+    -fx-background-insets: 0, 3;
 }
 
 .player-seat.active-seat {
-    -fx-background-color: -px-gold, #1d4a33;
-    -fx-background-insets: 0, 4;
+    -fx-background-color: -px-gold, rgba(7, 30, 18, 0.75);
+    -fx-background-insets: 0, 3;
 }
 
 .player-seat.active-seat.local-seat {
-    -fx-background-color: -px-gold, #1d4a33;
-    -fx-background-insets: 0, 4;
+    -fx-background-color: -px-gold, rgba(7, 30, 18, 0.75);
+    -fx-background-insets: 0, 3;
 }
 
 .seat-heading {
@@ -379,16 +414,20 @@
     -fx-alignment: center-left;
     -fx-spacing: 10;
     -fx-font-size: 8px;
-    -fx-text-fill: -px-muted;
+    -fx-text-fill: #d7ecd9;
 }
 
-/* ---------- Painel de ações ---------- */
+/* ---------- Rodapé ---------- */
 
 .action-panel {
-    -fx-padding: 16 24 20 24;
-    -fx-spacing: 12;
-    -fx-background-color: -px-black, -px-felt-dark;
-    -fx-background-insets: 0, 4 0 0 0;
+    -fx-padding: 10 20 20 20;
+    -fx-background-color: transparent;
+}
+
+.bet-panel {
+    -fx-padding: 10 12 12 12;
+    -fx-background-color: -px-black, rgba(11, 15, 13, 0.82);
+    -fx-background-insets: 0, 3;
 }
 
 .action-caption {
