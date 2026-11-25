@@ -371,8 +371,12 @@ public class ClientController {
     }
 
     private String shortMessage(Exception exception) {
-        String message = exception.getMessage();
-        if (message == null || message.isBlank()) return exception.getClass().getSimpleName();
+        Throwable causa = exception;
+        while (causa.getCause() != null) {
+            causa = causa.getCause();
+        }
+        String message = causa.getMessage();
+        if (message == null || message.isBlank()) return causa.getClass().getSimpleName();
         return message.length() > 72 ? message.substring(0, 69) + "..." : message;
     }
 

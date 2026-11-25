@@ -55,11 +55,25 @@ public class BlackjackServiceImpl extends UnicastRemoteObject implements Blackja
 
         boolean todosApostaram = jogadores.stream().allMatch(JogadorDTO::isPronto);
 
-        if (todosApostaram){
+        if (todosApostaram) {
+            // Segurança: caso absolutamente ninguém na sala tenha apostado
+            boolean alguemApostou = jogadores.stream().anyMatch(j -> j.getApostaAtual() > 0);
+            if (!alguemApostou) {
+                faseAtual = EstadoJogoDTO.FaseJogo.RODADA_FINALIZADA;
+                mensagemLog = "Ninguém possui fichas para apostar.";
+                return true;
+            }
+
             distribuirCartasIniciais();
             faseAtual = EstadoJogoDTO.FaseJogo.TURNO_JOGADORES;
+
+            // Encontra o PRIMEIRO jogador ativo (que não está parado/sem fichas)
             indiceJogadorDaVez = 0;
-            mensagemLog = "Cartas distribuídas. Vez de " + jogadores.get(0).getNome() + ".";
+            while (indiceJogadorDaVez < jogadores.size() && jogadores.get(indiceJogadorDaVez).isParou()) {
+                indiceJogadorDaVez++;
+            }
+
+            mensagemLog = "Cartas distribuídas. Vez de " + jogadores.get(indiceJogadorDaVez).getNome() + ".";
         }
         return true;
     }
@@ -74,19 +88,29 @@ public class BlackjackServiceImpl extends UnicastRemoteObject implements Blackja
             throw new RemoteException("Já existe uma rodada em andamento.");
         }
         buscarJogador(idJogador);
-        if (!jogadores.get(0).getId().equals(idJogador)) {
+        if (!jogadores.get(0).getId().equals(idJogador) && jogadores.get(0).getFichas() > 0) {
             throw new RemoteException("Somente quem criou a sala pode iniciar a rodada.");
         }
 
+        boolean alguemTemFichas = jogadores.stream().anyMatch(j -> j.getFichas() > 0);
+        if (!alguemTemFichas) {
+            throw new RemoteException("Nenhum jogador possui fichas para iniciar uma nova rodada.");
+        }
         faseAtual = EstadoJogoDTO.FaseJogo.FAZENDO_APOSTAS;
         baralho.reiniciar();
         maoDealer.limpar();
 
         for (JogadorDTO j : jogadores){
             j.getMao().limpar();
-            j.setParou(false);
-            j.setPronto(false);
             j.setApostaAtual(0);
+
+            if (j.getFichas() <= 0) {
+                j.setPronto(true);
+                j.setParou(true);
+            } else {
+                j.setParou(false);
+                j.setPronto(false);
+            }
         }
         mensagemLog = "Nova rodada iniciada Façam as apostas";
     }
@@ -95,8 +119,10 @@ public class BlackjackServiceImpl extends UnicastRemoteObject implements Blackja
 
     public void distribuirCartasIniciais(){
         for (JogadorDTO j : jogadores){
-            j.getMao().adicionarCarta(baralho.comprar());
-            j.getMao().adicionarCarta(baralho.comprar());
+            if(j.getApostaAtual() > 0) {
+                j.getMao().adicionarCarta(baralho.comprar());
+                j.getMao().adicionarCarta(baralho.comprar());
+            }
         }
         maoDealer.adicionarCarta(baralho.comprar());
         maoDealer.adicionarCarta(baralho.comprar());
@@ -130,6 +156,9 @@ public class BlackjackServiceImpl extends UnicastRemoteObject implements Blackja
 
     private void avancarTurno(){
         indiceJogadorDaVez++;
+        while (indiceJogadorDaVez < jogadores.size() && jogadores.get(indiceJogadorDaVez).isParou()) {
+            indiceJogadorDaVez++;
+        }
         if (indiceJogadorDaVez >= jogadores.size()){
             executarTurnoDealer();
         }else {
@@ -155,6 +184,7 @@ public class BlackjackServiceImpl extends UnicastRemoteObject implements Blackja
         StringBuilder sb = new StringBuilder("Rodada encerrada. ");
         if (dealerEstourou) sb.append("A banca estourou. ");
         for (JogadorDTO j : jogadores){
+            if (j.getApostaAtual() <= 0) continue;
             int pontosJ = j.getMao().getPontuacao();
             if (j.getMao().estourou()){
                 sb.append(j.getNome()).append(" perdeu. ");
